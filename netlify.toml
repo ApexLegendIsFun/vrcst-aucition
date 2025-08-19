@@ -1,0 +1,30 @@
+# Netlify configuration for VR CST Auction System
+
+[build]
+  # No build command needed for static HTML
+  publish = "."
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    # Security headers
+    X-Frame-Options = "SAMEORIGIN"
+    X-Content-Type-Options = "nosniff"
+    X-XSS-Protection = "1; mode=block"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    
+    # Cache control for better performance
+    Cache-Control = "public, max-age=3600"
+
+[[headers]]
+  for = "/index.html"
+  [headers.values]
+    # Don't cache the main HTML file too long
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+# Redirects (if needed in future)
+[[redirects]]
+  from = "/vr-cst-auction.html"
+  to = "/index.html"
+  status = 301
+  force = true

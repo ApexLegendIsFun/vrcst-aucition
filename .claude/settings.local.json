@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python:*)",
+      "Bash(pip install:*)",
+      "Bash(copy players.json players_backup.json)",
+      "Bash(powershell Copy-Item:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

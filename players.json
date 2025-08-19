@@ -1,0 +1,81 @@
+{
+  "players": [
+    {
+      "name": "여울 シ",
+      "profileImage": "./images/profiles/player_1_profile.png",
+      "highScore": "21,730",
+      "catchPhrase": "Chiken",
+      "fullImage": "./images/여울 シ.png"
+    },
+    {
+      "name": "Haru _",
+      "profileImage": "./images/profiles/player_2_profile.png",
+      "highScore": "S2 Premier 24098",
+      "catchPhrase": "다 잡아먹을테다 크앙",
+      "fullImage": "./images/Haru_.jpg"
+    },
+    {
+      "name": "_Kanaria_",
+      "profileImage": "./images/profiles/player_3_profile.png",
+      "highScore": "페잇 10레벨",
+      "catchPhrase": "나 한두마리 제자임 ㅇㅅㅇ",
+      "fullImage": "./images/_Kanaria_.PNG"
+    },
+    {
+      "name": "yel7",
+      "profileImage": "./images/profiles/player_4_profile.png",
+      "highScore": "프미 15000",
+      "catchPhrase": "하나둘셋브이알챗화이팅",
+      "fullImage": "./images/Yel7.jpeg"
+    },
+    {
+      "name": "Doyoung2",
+      "profileImage": "./images/profiles/player_5_profile.png",
+      "highScore": "프리미어 14,999",
+      "catchPhrase": "아자아자 화이팅",
+      "fullImage": "./images/Doyoung2.png"
+    },
+    {
+      "name": "catistrue",
+      "profileImage": "./images/profiles/player_6_profile.png",
+      "highScore": "프미17k",
+      "catchPhrase": "카운터스트라이크2화이팅",
+      "fullImage": "./images/catistrue.png"
+    },
+    {
+      "name": "arithmetica",
+      "profileImage": "./images/profiles/player_7_profile.png",
+      "highScore": "프리미어 18000점입니당.",
+      "catchPhrase": "화이팅!!!!!!!!!!!!!!!!",
+      "fullImage": "./images/arithmetica.jpg"
+    },
+    {
+      "name": "Hoon",
+      "profileImage": "./images/profiles/player_8_profile.png",
+      "highScore": "23000 플미",
+      "catchPhrase": "Ang",
+      "fullImage": "./images/Hoon.png"
+    },
+    {
+      "name": "Pocat",
+      "profileImage": "./images/profiles/player_9_profile.png",
+      "highScore": "30221",
+      "catchPhrase": "야호~~~",
+      "fullImage": "./images/Pocat.png"
+    },
+    {
+      "name": "요정",
+      "profileImage": "./images/profiles/player_10_profile.png",
+      "highScore": "프리미어 24999점",
+      "catchPhrase": "봐줘잉",
+      "fullImage": "./images/요정.png"
+    },
+    {
+      "name": "TOPGU",
+      "profileImage": "./images/player_11.png",
+      "highScore": "프리미어 15000",
+      "catchPhrase": "성실하게 매너게임 하겟숩니다",
+      "fullImage": "./images/player_11.png"
+    }
+  ]
+}
