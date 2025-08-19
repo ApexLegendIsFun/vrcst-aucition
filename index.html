@@ -1744,7 +1744,18 @@
                     timestamp: Date.now()
                 });
 
-                showToast(`${player.name}에게 ${bidAmount}P 입찰 완료!`, 'success');
+                // 5초 연장 처리
+                const currentTime = Date.now();
+                const remainingTime = auctionData.endTime - currentTime;
+                
+                // 남은 시간이 5초 미만이면 5초로 연장
+                if (remainingTime < 5000) {
+                    const newEndTime = currentTime + 5000; // 현재 시간 + 5초
+                    database.ref('currentAuction/endTime').set(newEndTime);
+                    showToast(`${player.name}에게 ${bidAmount}P 입찰 완료! (시간 연장됨)`, 'success');
+                } else {
+                    showToast(`${player.name}에게 ${bidAmount}P 입찰 완료!`, 'success');
+                }
                 
                 // 경매 패널 입찰 정보 업데이트
                 updateAuctionPanelBidInfo(playerKey);
