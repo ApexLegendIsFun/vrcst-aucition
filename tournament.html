@@ -1383,10 +1383,20 @@
             }
         }
 
+        // 시드 정보를 제거한 순수 팀 이름 추출
+        function extractTeamName(teamNameWithSeed) {
+            // "(3시드)" 같은 패턴을 제거
+            const cleanName = teamNameWithSeed.replace(/\s*\(\d+시드\)\s*$/, '').trim();
+            return cleanName;
+        }
+
         // 팀 이름으로 키 찾기
         function getTeamKey(teamName) {
+            // 시드 정보가 포함된 경우 제거
+            const cleanTeamName = extractTeamName(teamName);
+            
             for (let key in tournamentState.teams) {
-                if (tournamentState.teams[key].name === teamName) {
+                if (tournamentState.teams[key].name === cleanTeamName) {
                     return key;
                 }
             }
