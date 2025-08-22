@@ -343,6 +343,94 @@
             text-align: center;
         }
 
+        /* 그랜드 파이널 특별 스타일 */
+        #grandFinal {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 300px;
+        }
+
+        #grandFinal .round {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+        }
+
+        #grandFinal .match {
+            max-width: 600px;
+            width: 100%;
+            margin: 0 auto;
+            background: linear-gradient(145deg, rgba(255, 215, 0, 0.1), rgba(255, 237, 78, 0.05));
+            border: 2px solid rgba(255, 215, 0, 0.5);
+            box-shadow: 0 10px 40px rgba(255, 215, 0, 0.3),
+                        0 0 60px rgba(255, 215, 0, 0.2);
+            animation: grandFinalGlow 2s ease-in-out infinite;
+        }
+
+        @keyframes grandFinalGlow {
+            0%, 100% { 
+                box-shadow: 0 10px 40px rgba(255, 215, 0, 0.3),
+                           0 0 60px rgba(255, 215, 0, 0.2);
+            }
+            50% { 
+                box-shadow: 0 15px 50px rgba(255, 215, 0, 0.5),
+                           0 0 80px rgba(255, 215, 0, 0.4);
+            }
+        }
+
+        #grandFinal .match-header {
+            font-size: 1.3em;
+            font-weight: 700;
+            padding: 20px;
+            background: linear-gradient(135deg, var(--gold), #ffed4e);
+            color: var(--dark-bg);
+            text-align: center;
+            border-radius: 10px 10px 0 0;
+        }
+
+        #grandFinal .match-teams {
+            padding: 25px;
+            gap: 20px;
+        }
+
+        #grandFinal .match-team {
+            padding: 20px;
+            font-size: 1.2em;
+            font-weight: 600;
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.08));
+            border: 1px solid rgba(255, 215, 0, 0.4);
+        }
+
+        #grandFinal .score-input {
+            width: 70px;
+            padding: 10px;
+            font-size: 1.2em;
+            font-weight: 700;
+            background: rgba(255, 215, 0, 0.1);
+            border: 2px solid rgba(255, 215, 0, 0.5);
+            margin-left: auto;
+        }
+
+        #grandFinal .match-controls {
+            padding: 20px;
+        }
+
+        #grandFinal .btn-small {
+            padding: 12px 30px;
+            font-size: 1.1em;
+            background: linear-gradient(135deg, var(--gold), #ffed4e);
+            color: var(--dark-bg);
+            font-weight: 700;
+            border: none;
+            box-shadow: 0 5px 20px rgba(255, 215, 0, 0.4);
+        }
+
+        #grandFinal .btn-small:hover:not(:disabled) {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 8px 30px rgba(255, 215, 0, 0.6);
+        }
+
         /* 경기 컨트롤 */
         .match-controls {
             margin-top: 15px;
@@ -790,8 +878,8 @@
         </div>
 
         <!-- 그랜드 파이널 -->
-        <div class="bracket-container">
-            <h2 class="bracket-title">👑 그랜드 파이널</h2>
+        <div class="bracket-container" style="margin-top: 60px;">
+            <h2 class="bracket-title" style="font-size: 2.5em; text-align: center; margin-bottom: 40px; background: linear-gradient(135deg, #ffd700, #ffed4e); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">👑 그랜드 파이널 👑</h2>
             <div class="bracket" id="grandFinal">
                 <div class="round">
                     <div class="match" id="gf-match1">
@@ -1164,12 +1252,14 @@
                 gfMatch1.querySelector('.btn-small').disabled = false;
             }
 
-            // 그랜드 파이너 완료 후
+            // 그랜드 파이널 완료 후
             if (matchId === 'gf-match1') {
                 const winnerKey = getTeamKey(winnerName);
-                tournamentState.champion = winnerKey;
-                tournamentState.teams[winnerKey].status = 'champion';
-                showVictoryModal(winnerKey);
+                if (winnerKey) {
+                    tournamentState.champion = winnerKey;
+                    tournamentState.teams[winnerKey].status = 'champion';
+                    showVictoryModal(winnerKey);
+                }
             }
         }
 
