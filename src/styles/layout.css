@@ -1,0 +1,263 @@
+/* Layout Styles */
+
+/* Container */
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  position: relative;
+  z-index: var(--z-base);
+}
+
+/* Header */
+.header {
+  text-align: center;
+  margin-bottom: var(--spacing-2xl);
+  animation: fadeInDown 0.8s ease;
+  position: relative;
+  padding: var(--spacing-2xl) 0;
+}
+
+.header h1 {
+  font-size: 4em;
+  font-family: var(--font-heading);
+  font-weight: 900;
+  font-style: italic;
+  margin-bottom: var(--spacing-md);
+  background: var(--gradient-red-blue);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  position: relative;
+  display: inline-block;
+  filter: drop-shadow(0 0 30px rgba(239, 90, 111, 0.5));
+}
+
+/* Neon glow effect for title */
+.header h1::before {
+  content: 'VR CST';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: -1;
+  background: var(--gradient-neon);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: blur(10px);
+  opacity: 0.5;
+}
+
+.header .subtitle {
+  font-size: 1.3em;
+  color: var(--gray-light);
+  font-weight: 400;
+  letter-spacing: 2px;
+  margin-top: var(--spacing-sm);
+  text-transform: uppercase;
+  opacity: 0.9;
+}
+
+/* User Info Section */
+.user-info {
+  background: rgba(44, 53, 71, 0.6);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(239, 90, 111, 0.3);
+  border-radius: var(--radius-xl);
+  padding: var(--spacing-lg);
+  margin-bottom: var(--spacing-xl);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.5),
+              inset 0 1px 0 rgba(255,255,255,0.1);
+  animation: fadeIn 1s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.user-info::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--primary-red), transparent);
+  animation: shimmer 3s ease-in-out infinite;
+}
+
+.user-info h2 {
+  color: var(--white);
+  margin-bottom: var(--spacing-lg);
+  font-size: 1.8em;
+  font-weight: 700;
+  background: var(--gradient-red-blue);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.login-section {
+  display: flex;
+  gap: var(--spacing-md);
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.user-status {
+  margin-top: var(--spacing-md);
+  font-size: 1.1em;
+  color: var(--gray-light);
+}
+
+/* Admin Panel */
+.admin-panel {
+  background: rgba(44, 53, 71, 0.8);
+  backdrop-filter: blur(10px);
+  border: 2px solid var(--primary-red);
+  border-radius: var(--radius-xl);
+  padding: var(--spacing-xl);
+  margin-bottom: var(--spacing-xl);
+  display: none;
+  animation: slideDown 0.5s ease;
+  box-shadow: var(--shadow-glow-red);
+}
+
+.admin-panel h3 {
+  color: var(--primary-red);
+  margin-bottom: var(--spacing-lg);
+  font-size: 1.8em;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.admin-panel h4 {
+  color: var(--gray-light);
+  margin: var(--spacing-lg) 0 var(--spacing-md) 0;
+}
+
+/* Grids */
+.players-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: var(--spacing-lg);
+  margin-top: var(--spacing-xl);
+  animation: fadeIn 0.8s ease;
+}
+
+.player-selection-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: var(--spacing-md);
+  margin-top: var(--spacing-md);
+}
+
+.team-panels-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: var(--spacing-lg);
+  margin-bottom: var(--spacing-xl);
+}
+
+/* Teams Section */
+.teams-section {
+  margin: var(--spacing-xl) 0;
+}
+
+.teams-section h3 {
+  text-align: center;
+  font-size: 2em;
+  margin-bottom: var(--spacing-xl);
+  background: var(--gradient-red-blue);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Tabs Container */
+.tabs-container {
+  margin: var(--spacing-xl) 0;
+  text-align: center;
+}
+
+/* Auction Timer */
+.auction-timer {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: rgba(239, 90, 111, 0.95);
+  padding: var(--spacing-md) var(--spacing-lg);
+  border-radius: var(--radius-lg);
+  display: none;
+  z-index: var(--z-sticky);
+  box-shadow: var(--shadow-glow-red);
+  backdrop-filter: blur(10px);
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.timer-countdown {
+  font-size: 2em;
+  font-weight: bold;
+  color: var(--white);
+  font-family: 'monospace';
+}
+
+/* Auction Panel */
+.auction-panel {
+  background: linear-gradient(135deg, rgba(239, 90, 111, 0.1), rgba(83, 100, 147, 0.1));
+  backdrop-filter: blur(10px);
+  border: 2px solid var(--primary-red);
+  border-radius: var(--radius-xl);
+  padding: var(--spacing-xl);
+  margin-bottom: var(--spacing-xl);
+  display: none;
+  animation: slideDown 0.5s ease;
+  box-shadow: var(--shadow-glow-red);
+}
+
+.auction-panel h3 {
+  color: var(--primary-red);
+  margin-bottom: var(--spacing-lg);
+  font-size: 1.8em;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+/* Responsive Layout */
+@media (max-width: 768px) {
+  .container {
+    padding: 0 var(--spacing-md);
+  }
+  
+  .header {
+    padding: var(--spacing-lg) 0;
+  }
+  
+  .header h1 {
+    font-size: 2.5em;
+  }
+  
+  .players-grid {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: var(--spacing-md);
+  }
+  
+  .team-panels-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .login-section {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .auction-timer {
+    top: 10px;
+    right: 10px;
+    padding: var(--spacing-sm) var(--spacing-md);
+  }
+  
+  .timer-countdown {
+    font-size: 1.5em;
+  }
+}

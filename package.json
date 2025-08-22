@@ -1,0 +1,30 @@
+{
+  "name": "vrcst-auction",
+  "private": true,
+  "version": "2.0.0",
+  "type": "module",
+  "description": "VR CST Team Auction System - Refactored Version",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "lint": "eslint src/**/*.js",
+    "format": "prettier --write \"src/**/*.{js,css,html}\""
+  },
+  "devDependencies": {
+    "@vitejs/plugin-legacy": "^5.2.0",
+    "eslint": "^8.56.0",
+    "eslint-config-prettier": "^9.1.0",
+    "prettier": "^3.2.4",
+    "vite": "^5.0.11"
+  },
+  "dependencies": {
+    "firebase": "^10.7.2"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
+}

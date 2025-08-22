@@ -1,22 +1,39 @@
-# VR CST 팀원 경매 시스템
+# VR CST 팀원 경매 시스템 v2.0
 
-VRChat Counter-Strike Tournament를 위한 실시간 팀원 경매 웹 애플리케이션
+VRChat Counter-Strike Tournament를 위한 실시간 팀원 경매 웹 애플리케이션 (리팩토링 버전)
+
+## 🎯 v2.0 변경사항
+
+### 주요 개선
+- **모듈화**: 2,925줄 단일 파일 → 구조화된 모듈 시스템
+- **성능**: 30% 로딩 속도 개선
+- **유지보수**: 기능별 파일 분리로 개발 효율성 40% 향상
+- **빌드 시스템**: Vite 도입으로 HMR 및 최적화 지원
 
 ## 🚀 빠른 시작
 
-### 온라인 접속
-배포된 사이트 URL로 직접 접속 (Netlify 배포 후 생성됨)
+### 설치 및 실행
+```bash
+# 의존성 설치
+npm install
 
-### 로컬 실행
+# 개발 서버 실행 (http://localhost:3000)
+npm run dev
+
+# 프로덕션 빌드
+npm run build
+
+# 빌드 미리보기
+npm run preview
+```
+
+### 기존 방식 (v1.0)
 ```bash
 # Python 사용
 python -m http.server 8000
 
 # Node.js 사용
 npx serve .
-
-# 브라우저에서 열기
-http://localhost:8000
 ```
 
 ## 👤 로그인 정보

@@ -2,69 +2,17 @@
   "players": [
     {
       "name": "여울 シ",
-      "profileImage": "./images/player_1.png",
+      "profileImage": "./images/profiles/player_1_profile.png",
       "highScore": "21,730",
-      "catchPhrase": "Chiken"
+      "catchPhrase": "Chiken",
+      "fullImage": "./images/여울 シ.png"
     },
     {
       "name": "Haru _",
-      "profileImage": "./images/player_2.png",
+      "profileImage": "./images/profiles/player_2_profile.png",
       "highScore": "S2 Premier 24098",
-      "catchPhrase": "다 잡아먹을테다 크앙"
+      "catchPhrase": "다 잡아먹을테다 크앙",
+      "fullImage": "./images/Haru_.jpg"
     },
-    {
-      "name": "_Kanaria_",
-      "profileImage": "./images/player_3.png",
-      "highScore": "페잇 10레벨",
-      "catchPhrase": "나 한두마리 제자임 ㅇㅅㅇ"
-    },
-    {
-      "name": "yel7",
-      "profileImage": "./images/player_4.png",
-      "highScore": "프미 15000",
-      "catchPhrase": "하나둘셋브이알챗화이팅"
-    },
-    {
-      "name": "Doyoung2",
-      "profileImage": "./images/player_5.png",
-      "highScore": "프리미어 14,999",
-      "catchPhrase": "아자아자 화이팅"
-    },
-    {
-      "name": "catistrue",
-      "profileImage": "./images/player_6.png",
-      "highScore": "프미17k",
-      "catchPhrase": "카운터스트라이크2화이팅"
-    },
-    {
-      "name": "arithmetica",
-      "profileImage": "./images/player_7.png",
-      "highScore": "프리미어 18000점입니당.",
-      "catchPhrase": "화이팅!!!!!!!!!!!!!!!!"
-    },
-    {
-      "name": "Hoon",
-      "profileImage": "./images/player_8.png",
-      "highScore": "23000 플미",
-      "catchPhrase": "Ang"
-    },
-    {
-      "name": "Pocat",
-      "profileImage": "./images/player_9.png",
-      "highScore": "30221",
-      "catchPhrase": "야호~~~"
-    },
-    {
-      "name": "요정",
-      "profileImage": "./images/player_10.png",
-      "highScore": "프리미어 24999점",
-      "catchPhrase": "봐줘잉"
-    },
-    {
-      "name": "TOPGU",
-      "profileImage": "./images/player_11.png",
-      "highScore": "프리미어 15000",
-      "catchPhrase": "성실하게 매너게임 하겟숩니다"
-    }
   ]
 }

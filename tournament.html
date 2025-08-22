@@ -259,16 +259,32 @@
 
         .bracket {
             display: flex;
-            justify-content: space-around;
-            align-items: center;
-            min-width: 800px;
-            margin: 20px 0;
+            justify-content: space-between;
+            align-items: flex-start;
+            min-width: 900px;
+            margin: 20px auto;
+            padding: 0 20px;
         }
 
         .round {
             display: flex;
             flex-direction: column;
+            justify-content: center;
             gap: 30px;
+            min-height: 200px;
+        }
+        
+        /* 라운드별 위치 조정 */
+        .round:nth-child(1) {
+            margin-top: 60px;
+        }
+        
+        .round:nth-child(2) {
+            margin-top: 30px;
+        }
+        
+        .round:nth-child(3) {
+            margin-top: 0;
         }
 
         .match {
@@ -667,17 +683,17 @@
         <div class="bracket-container">
             <h2 class="bracket-title">🏆 승자조 (Winner's Bracket)</h2>
             <div class="bracket" id="winnersBracket">
-                <!-- 라운드 1 -->
+                <!-- 라운드 1 (플레이인) -->
                 <div class="round">
                     <div class="match" id="wb-match1">
-                        <div class="match-header">준결승 1</div>
+                        <div class="match-header">1경기: 플레이인</div>
                         <div class="match-teams">
                             <div class="match-team" onclick="selectWinner('wb-match1', 0)">
-                                <span id="wb-match1-team1">Team Alpha</span>
+                                <span id="wb-match1-team1">3시드</span>
                                 <input type="number" class="score-input" id="wb-match1-score1" min="0" value="0">
                             </div>
                             <div class="match-team" onclick="selectWinner('wb-match1', 1)">
-                                <span id="wb-match1-team2">Team Bravo</span>
+                                <span id="wb-match1-team2">4시드</span>
                                 <input type="number" class="score-input" id="wb-match1-score2" min="0" value="0">
                             </div>
                         </div>
@@ -685,35 +701,39 @@
                             <button class="btn btn-small" onclick="confirmMatch('wb-match1')">결과 확정</button>
                         </div>
                     </div>
+                </div>
+
+                <!-- 라운드 2 (준결승) -->
+                <div class="round">
                     <div class="match" id="wb-match2">
-                        <div class="match-header">준결승 2</div>
+                        <div class="match-header">2경기: 준결승</div>
                         <div class="match-teams">
                             <div class="match-team" onclick="selectWinner('wb-match2', 0)">
-                                <span id="wb-match2-team1">Team Charlie</span>
-                                <input type="number" class="score-input" id="wb-match2-score1" min="0" value="0">
+                                <span id="wb-match2-team1">1경기 승자</span>
+                                <input type="number" class="score-input" id="wb-match2-score1" min="0" value="0" disabled>
                             </div>
                             <div class="match-team" onclick="selectWinner('wb-match2', 1)">
-                                <span id="wb-match2-team2">Team Delta</span>
-                                <input type="number" class="score-input" id="wb-match2-score2" min="0" value="0">
+                                <span id="wb-match2-team2">2시드</span>
+                                <input type="number" class="score-input" id="wb-match2-score2" min="0" value="0" disabled>
                             </div>
                         </div>
                         <div class="match-controls">
-                            <button class="btn btn-small" onclick="confirmMatch('wb-match2')">결과 확정</button>
+                            <button class="btn btn-small" onclick="confirmMatch('wb-match2')" disabled>결과 확정</button>
                         </div>
                     </div>
                 </div>
 
-                <!-- 라운드 2 (결승) -->
+                <!-- 라운드 3 (승자조 결승) -->
                 <div class="round">
                     <div class="match" id="wb-final">
-                        <div class="match-header">승자조 결승</div>
+                        <div class="match-header">3경기: 승자조 결승</div>
                         <div class="match-teams">
                             <div class="match-team" onclick="selectWinner('wb-final', 0)">
-                                <span id="wb-final-team1">대기중...</span>
+                                <span id="wb-final-team1">2경기 승자</span>
                                 <input type="number" class="score-input" id="wb-final-score1" min="0" value="0" disabled>
                             </div>
                             <div class="match-team" onclick="selectWinner('wb-final', 1)">
-                                <span id="wb-final-team2">대기중...</span>
+                                <span id="wb-final-team2">1시드</span>
                                 <input type="number" class="score-input" id="wb-final-score2" min="0" value="0" disabled>
                             </div>
                         </div>
@@ -731,14 +751,14 @@
             <div class="bracket" id="losersBracket">
                 <div class="round">
                     <div class="match" id="lb-match1">
-                        <div class="match-header">패자조 준결승</div>
+                        <div class="match-header">4경기: 패자조</div>
                         <div class="match-teams">
                             <div class="match-team" onclick="selectWinner('lb-match1', 0)">
-                                <span id="lb-match1-team1">대기중...</span>
+                                <span id="lb-match1-team1">1경기 패자</span>
                                 <input type="number" class="score-input" id="lb-match1-score1" min="0" value="0" disabled>
                             </div>
                             <div class="match-team" onclick="selectWinner('lb-match1', 1)">
-                                <span id="lb-match1-team2">대기중...</span>
+                                <span id="lb-match1-team2">2경기 패자</span>
                                 <input type="number" class="score-input" id="lb-match1-score2" min="0" value="0" disabled>
                             </div>
                         </div>
@@ -750,14 +770,14 @@
 
                 <div class="round">
                     <div class="match" id="lb-final">
-                        <div class="match-header">패자조 결승</div>
+                        <div class="match-header">5경기: 패자조 결승</div>
                         <div class="match-teams">
                             <div class="match-team" onclick="selectWinner('lb-final', 0)">
-                                <span id="lb-final-team1">대기중...</span>
+                                <span id="lb-final-team1">4경기 승자</span>
                                 <input type="number" class="score-input" id="lb-final-score1" min="0" value="0" disabled>
                             </div>
                             <div class="match-team" onclick="selectWinner('lb-final', 1)">
-                                <span id="lb-final-team2">대기중...</span>
+                                <span id="lb-final-team2">3경기 패자</span>
                                 <input type="number" class="score-input" id="lb-final-score2" min="0" value="0" disabled>
                             </div>
                         </div>
@@ -775,14 +795,14 @@
             <div class="bracket" id="grandFinal">
                 <div class="round">
                     <div class="match" id="gf-match1">
-                        <div class="match-header">그랜드 파이널</div>
+                        <div class="match-header">6경기: 그랜드 파이널</div>
                         <div class="match-teams">
                             <div class="match-team" onclick="selectWinner('gf-match1', 0)">
-                                <span id="gf-match1-team1">승자조 우승팀</span>
+                                <span id="gf-match1-team1">3경기 승자</span>
                                 <input type="number" class="score-input" id="gf-match1-score1" min="0" value="0" disabled>
                             </div>
                             <div class="match-team" onclick="selectWinner('gf-match1', 1)">
-                                <span id="gf-match1-team2">패자조 우승팀</span>
+                                <span id="gf-match1-team2">5경기 승자</span>
                                 <input type="number" class="score-input" id="gf-match1-score2" min="0" value="0" disabled>
                             </div>
                         </div>
@@ -822,6 +842,65 @@
     </div>
 
     <script>
+        // 시드 설정 업데이트
+        function updateSeeds() {
+            const seeds = ['seed1', 'seed2', 'seed3', 'seed4'];
+            const selected = [];
+            
+            seeds.forEach(seedId => {
+                const select = document.getElementById(seedId);
+                const value = select.value;
+                
+                // 이미 선택된 팀 비활성화
+                seeds.forEach(otherId => {
+                    if (otherId !== seedId) {
+                        const otherSelect = document.getElementById(otherId);
+                        Array.from(otherSelect.options).forEach(option => {
+                            if (option.value === value && value !== '') {
+                                option.disabled = true;
+                            } else if (!selected.includes(option.value) || option.value === '') {
+                                option.disabled = false;
+                            }
+                        });
+                    }
+                });
+                
+                if (value) selected.push(value);
+            });
+        }
+        
+        // 시드 적용
+        function applySeeds() {
+            const seed1 = document.getElementById('seed1').value;
+            const seed2 = document.getElementById('seed2').value;
+            const seed3 = document.getElementById('seed3').value;
+            const seed4 = document.getElementById('seed4').value;
+            
+            if (!seed1 || !seed2 || !seed3 || !seed4) {
+                alert('모든 시드를 선택해주세요.');
+                return;
+            }
+            
+            const teamNames = {
+                alpha: 'Team Alpha',
+                bravo: 'Team Bravo',
+                charlie: 'Team Charlie',
+                delta: 'Team Delta'
+            };
+            
+            // 1경기: 3시드 vs 4시드
+            document.getElementById('wb-match1-team1').textContent = teamNames[seed3] + ' (3시드)';
+            document.getElementById('wb-match1-team2').textContent = teamNames[seed4] + ' (4시드)';
+            
+            // 2경기: 2시드 설정
+            document.getElementById('wb-match2-team2').textContent = teamNames[seed2] + ' (2시드)';
+            
+            // 3경기: 1시드 설정
+            document.getElementById('wb-final-team2').textContent = teamNames[seed1] + ' (1시드)';
+            
+            alert('시드가 적용되었습니다!');
+        }
+        
         // 토너먼트 상태 관리
         let tournamentState = {
             teams: {
@@ -1009,51 +1088,72 @@
 
         // 토너먼트 진행
         function advanceTournament(matchId, winnerName, loserName) {
-            // 승자조 준결승 완료 후
-            if (matchId === 'wb-match1' || matchId === 'wb-match2') {
-                // 패자는 패자조로
-                const lbMatch = document.getElementById('lb-match1');
-                if (matchId === 'wb-match1') {
-                    document.getElementById('lb-match1-team1').textContent = loserName;
-                    lbMatch.querySelector('.score-input').disabled = false;
-                    lbMatch.querySelector('.btn-small').disabled = false;
-                    
-                    // 승자는 승자조 결승으로
-                    document.getElementById('wb-final-team1').textContent = winnerName;
-                } else {
+            // 1경기 (플레이인) 완료 후
+            if (matchId === 'wb-match1') {
+                // 승자는 2경기로
+                document.getElementById('wb-match2-team1').textContent = winnerName;
+                
+                // 2경기 활성화
+                const wbMatch2 = document.getElementById('wb-match2');
+                wbMatch2.querySelectorAll('.score-input').forEach(input => input.disabled = false);
+                wbMatch2.querySelector('.btn-small').disabled = false;
+                
+                // 패자는 패자조로 대기 (나중에 2경기 패자와 경기)
+                window.match1Loser = loserName;
+            }
+
+            // 2경기 (준결승) 완료 후
+            if (matchId === 'wb-match2') {
+                // 승자는 3경기로
+                document.getElementById('wb-final-team1').textContent = winnerName;
+                
+                // 3경기 활성화
+                const wbFinal = document.getElementById('wb-final');
+                wbFinal.querySelectorAll('.score-input').forEach(input => input.disabled = false);
+                wbFinal.querySelector('.btn-small').disabled = false;
+                
+                // 패자는 패자조로 (1경기 패자와 경기)
+                if (window.match1Loser) {
+                    document.getElementById('lb-match1-team1').textContent = window.match1Loser;
                     document.getElementById('lb-match1-team2').textContent = loserName;
                     
-                    // 승자는 승자조 결승으로
-                    document.getElementById('wb-final-team2').textContent = winnerName;
-                    
-                    // 승자조 결승 활성화
-                    const wbFinal = document.getElementById('wb-final');
-                    wbFinal.querySelectorAll('.score-input').forEach(input => input.disabled = false);
-                    wbFinal.querySelector('.btn-small').disabled = false;
+                    // 4경기 (패자조) 활성화
+                    const lbMatch1 = document.getElementById('lb-match1');
+                    lbMatch1.querySelectorAll('.score-input').forEach(input => input.disabled = false);
+                    lbMatch1.querySelector('.btn-small').disabled = false;
                 }
             }
 
-            // 승자조 결승 완료 후
+            // 3경기 (승자조 결승) 완료 후
             if (matchId === 'wb-final') {
-                // 패자는 패자조 결승으로
-                document.getElementById('lb-final-team2').textContent = loserName;
-                
                 // 승자는 그랜드 파이널로
                 document.getElementById('gf-match1-team1').textContent = winnerName;
+                
+                // 패자는 5경기 (패자조 결승)로
+                document.getElementById('lb-final-team2').textContent = loserName;
+                
+                // 5경기가 이미 활성화되어 있으면 (패자조 완료) 그랜드 파이널 활성화
+                if (document.getElementById('lb-final-team1').textContent !== '4경기 승자' 
+                    && document.getElementById('lb-final-team1').textContent !== '대기중...') {
+                    // 그랜드 파이널 활성화
+                    const gfMatch = document.getElementById('gf-match1');
+                    gfMatch.querySelectorAll('.score-input').forEach(input => input.disabled = false);
+                    gfMatch.querySelector('.btn-small').disabled = false;
+                }
             }
 
-            // 패자조 준결승 완료 후
+            // 4경기 (패자조) 완료 후
             if (matchId === 'lb-match1') {
-                // 승자는 패자조 결승으로
+                // 승자는 5경기로
                 document.getElementById('lb-final-team1').textContent = winnerName;
                 
-                // 패자조 결승 활성화
+                // 5경기 (패자조 결승) 활성화
                 const lbFinal = document.getElementById('lb-final');
                 lbFinal.querySelectorAll('.score-input').forEach(input => input.disabled = false);
                 lbFinal.querySelector('.btn-small').disabled = false;
             }
 
-            // 패자조 결승 완료 후
+            // 5경기 (패자조 결승) 완료 후
             if (matchId === 'lb-final') {
                 // 승자는 그랜드 파이널로
                 document.getElementById('gf-match1-team2').textContent = winnerName;
@@ -1064,7 +1164,7 @@
                 gfMatch1.querySelector('.btn-small').disabled = false;
             }
 
-            // 그랜드 파이널 완료 후
+            // 그랜드 파이너 완료 후
             if (matchId === 'gf-match1') {
                 const winnerKey = getTeamKey(winnerName);
                 tournamentState.champion = winnerKey;

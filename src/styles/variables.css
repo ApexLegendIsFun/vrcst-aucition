@@ -1,0 +1,70 @@
+/* CSS Variables and Theming */
+:root {
+  /* Color Palette from Design */
+  --primary-red: #ef5a6f;
+  --primary-blue: #536493;
+  --dark-bg: #1a1f2e;
+  --dark-bg-light: #2c3547;
+  --neon-pink: #ff4d6d;
+  --neon-purple: #c77dff;
+  --white: #ffffff;
+  --gray-light: #e1e5f2;
+  --gray-medium: #8892b0;
+  --gray-dark: #495057;
+  
+  /* Gradients */
+  --gradient-red-blue: linear-gradient(135deg, #ef5a6f 0%, #536493 100%);
+  --gradient-neon: linear-gradient(135deg, #ff4d6d 0%, #c77dff 100%);
+  --gradient-dark: linear-gradient(180deg, #1a1f2e 0%, #2c3547 100%);
+  
+  /* Typography */
+  --font-primary: 'Gowun Dodum', 'Inter', 'Segoe UI', sans-serif;
+  --font-heading: 'Poppins', sans-serif;
+  
+  /* Spacing */
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 16px;
+  --spacing-lg: 24px;
+  --spacing-xl: 32px;
+  --spacing-2xl: 48px;
+  
+  /* Border Radius */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 20px;
+  --radius-full: 50%;
+  
+  /* Shadows */
+  --shadow-sm: 0 2px 4px rgba(0,0,0,0.1);
+  --shadow-md: 0 4px 6px rgba(0,0,0,0.1);
+  --shadow-lg: 0 10px 15px rgba(0,0,0,0.1);
+  --shadow-xl: 0 20px 25px rgba(0,0,0,0.15);
+  --shadow-glow-red: 0 0 20px rgba(239, 90, 111, 0.3);
+  --shadow-glow-blue: 0 0 20px rgba(83, 100, 147, 0.3);
+  
+  /* Z-index layers */
+  --z-background: -2;
+  --z-gradient: -1;
+  --z-base: 0;
+  --z-dropdown: 100;
+  --z-sticky: 200;
+  --z-fixed: 300;
+  --z-modal-backdrop: 400;
+  --z-modal: 500;
+  --z-popover: 600;
+  --z-tooltip: 700;
+  --z-toast: 800;
+  
+  /* Transitions */
+  --transition-fast: 0.15s ease;
+  --transition-base: 0.3s ease;
+  --transition-slow: 0.5s ease;
+  
+  /* Breakpoints (for reference in JS) */
+  --breakpoint-mobile: 480px;
+  --breakpoint-tablet: 768px;
+  --breakpoint-desktop: 1024px;
+  --breakpoint-wide: 1280px;
+}
