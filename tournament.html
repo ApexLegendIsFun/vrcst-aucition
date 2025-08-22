@@ -194,6 +194,79 @@
             font-size: 1.1em;
         }
 
+        /* 시드 배정 스타일 */
+        .seed-assignment {
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 15px;
+            padding: 20px;
+        }
+
+        .seed-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .seed-card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 20px;
+            border-radius: 10px;
+            border: 1px solid rgba(239, 90, 111, 0.3);
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .seed-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(239, 90, 111, 0.2);
+        }
+
+        .seed-card h3 {
+            color: var(--neon-pink);
+            margin-bottom: 10px;
+            font-size: 1.2em;
+        }
+
+        .seed-description {
+            color: var(--gray-medium);
+            font-size: 0.9em;
+            margin-bottom: 15px;
+        }
+
+        .seed-select {
+            width: 100%;
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 8px;
+            color: var(--white);
+            font-size: 1em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .seed-select:hover {
+            background: rgba(255, 255, 255, 0.15);
+            border-color: var(--neon-pink);
+        }
+
+        .seed-select:focus {
+            outline: none;
+            border-color: var(--neon-pink);
+            box-shadow: 0 0 10px rgba(239, 90, 111, 0.3);
+        }
+
+        .seed-select option {
+            background: var(--dark-bg);
+            color: var(--white);
+        }
+
+        .seed-select:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
         /* 팀 현황 */
         .teams-status {
             display: grid;
@@ -744,6 +817,68 @@
             </div>
         </div>
 
+        <!-- 시드 배정 섹션 -->
+        <div class="tournament-info" style="margin-top: 30px;">
+            <h2>🌟 시드 배정</h2>
+            <div class="seed-assignment">
+                <div class="seed-explanation">
+                    <p style="margin-bottom: 20px; color: var(--gray-light);">
+                        시드를 배정하여 대진표를 구성합니다. 높은 시드일수록 유리한 위치에서 시작합니다.
+                    </p>
+                </div>
+                <div class="seed-grid">
+                    <div class="seed-card">
+                        <h3>1번 시드</h3>
+                        <p class="seed-description">승자조 결승 직행</p>
+                        <select id="seed1" class="seed-select" onchange="updateSeeds()">
+                            <option value="">선택하세요</option>
+                            <option value="alpha">Team Alpha</option>
+                            <option value="bravo">Team Bravo</option>
+                            <option value="charlie">Team Charlie</option>
+                            <option value="delta">Team Delta</option>
+                        </select>
+                    </div>
+                    <div class="seed-card">
+                        <h3>2번 시드</h3>
+                        <p class="seed-description">승자조 준결승 직행</p>
+                        <select id="seed2" class="seed-select" onchange="updateSeeds()">
+                            <option value="">선택하세요</option>
+                            <option value="alpha">Team Alpha</option>
+                            <option value="bravo">Team Bravo</option>
+                            <option value="charlie">Team Charlie</option>
+                            <option value="delta">Team Delta</option>
+                        </select>
+                    </div>
+                    <div class="seed-card">
+                        <h3>3번 시드</h3>
+                        <p class="seed-description">플레이인 경기</p>
+                        <select id="seed3" class="seed-select" onchange="updateSeeds()">
+                            <option value="">선택하세요</option>
+                            <option value="alpha">Team Alpha</option>
+                            <option value="bravo">Team Bravo</option>
+                            <option value="charlie">Team Charlie</option>
+                            <option value="delta">Team Delta</option>
+                        </select>
+                    </div>
+                    <div class="seed-card">
+                        <h3>4번 시드</h3>
+                        <p class="seed-description">플레이인 경기</p>
+                        <select id="seed4" class="seed-select" onchange="updateSeeds()">
+                            <option value="">선택하세요</option>
+                            <option value="alpha">Team Alpha</option>
+                            <option value="bravo">Team Bravo</option>
+                            <option value="charlie">Team Charlie</option>
+                            <option value="delta">Team Delta</option>
+                        </select>
+                    </div>
+                </div>
+                <div style="text-align: center; margin-top: 30px;">
+                    <button class="btn" onclick="applySeeds()">시드 적용하기</button>
+                    <button class="btn btn-secondary" onclick="resetSeeds()" style="margin-left: 10px;">시드 초기화</button>
+                </div>
+            </div>
+        </div>
+
         <div class="teams-status" id="teamsStatus">
             <div class="team-card team-alpha">
                 <h3>Team Alpha</h3>
@@ -976,6 +1111,15 @@
                 delta: 'Team Delta'
             };
             
+            // 시드 정보 저장
+            const seedAssignments = {
+                seed1: seed1,
+                seed2: seed2,
+                seed3: seed3,
+                seed4: seed4
+            };
+            localStorage.setItem('tournamentSeeds', JSON.stringify(seedAssignments));
+            
             // 1경기: 3시드 vs 4시드
             document.getElementById('wb-match1-team1').textContent = teamNames[seed3] + ' (3시드)';
             document.getElementById('wb-match1-team2').textContent = teamNames[seed4] + ' (4시드)';
@@ -986,7 +1130,82 @@
             // 3경기: 1시드 설정
             document.getElementById('wb-final-team2').textContent = teamNames[seed1] + ' (1시드)';
             
+            // 토너먼트 상태에도 시드 정보 저장
+            tournamentState.seeds = seedAssignments;
+            saveState();
+            
             alert('시드가 적용되었습니다!');
+        }
+        
+        // 시드 초기화
+        function resetSeeds() {
+            const seeds = ['seed1', 'seed2', 'seed3', 'seed4'];
+            
+            // 모든 선택 초기화
+            seeds.forEach(seedId => {
+                const select = document.getElementById(seedId);
+                select.value = '';
+                
+                // 모든 옵션 활성화
+                Array.from(select.options).forEach(option => {
+                    option.disabled = false;
+                });
+            });
+            
+            // localStorage에서 시드 정보 제거
+            localStorage.removeItem('tournamentSeeds');
+            
+            // 대진표 텍스트 초기화
+            document.getElementById('wb-match1-team1').textContent = '3시드';
+            document.getElementById('wb-match1-team2').textContent = '4시드';
+            document.getElementById('wb-match2-team2').textContent = '2시드';
+            document.getElementById('wb-final-team2').textContent = '1시드';
+            
+            // 토너먼트 상태에서도 제거
+            if (tournamentState.seeds) {
+                delete tournamentState.seeds;
+                saveState();
+            }
+        }
+        
+        // 저장된 시드 불러오기
+        function loadSeeds() {
+            const savedSeeds = localStorage.getItem('tournamentSeeds');
+            if (savedSeeds) {
+                const seedAssignments = JSON.parse(savedSeeds);
+                
+                // 시드 선택 복원
+                Object.keys(seedAssignments).forEach(seedId => {
+                    const select = document.getElementById(seedId);
+                    if (select) {
+                        select.value = seedAssignments[seedId];
+                    }
+                });
+                
+                // 중복 선택 방지 업데이트
+                updateSeeds();
+                
+                // 대진표에 적용
+                const teamNames = {
+                    alpha: 'Team Alpha',
+                    bravo: 'Team Bravo',
+                    charlie: 'Team Charlie',
+                    delta: 'Team Delta'
+                };
+                
+                if (seedAssignments.seed3) {
+                    document.getElementById('wb-match1-team1').textContent = teamNames[seedAssignments.seed3] + ' (3시드)';
+                }
+                if (seedAssignments.seed4) {
+                    document.getElementById('wb-match1-team2').textContent = teamNames[seedAssignments.seed4] + ' (4시드)';
+                }
+                if (seedAssignments.seed2) {
+                    document.getElementById('wb-match2-team2').textContent = teamNames[seedAssignments.seed2] + ' (2시드)';
+                }
+                if (seedAssignments.seed1) {
+                    document.getElementById('wb-final-team2').textContent = teamNames[seedAssignments.seed1] + ' (1시드)';
+                }
+            }
         }
         
         // 토너먼트 상태 관리
@@ -1433,6 +1652,7 @@
         function resetTournament() {
             if (confirm('정말로 토너먼트를 초기화하시겠습니까? 모든 경기 기록이 삭제됩니다.')) {
                 localStorage.removeItem('tournamentState');
+                localStorage.removeItem('tournamentSeeds');
                 location.reload();
             }
         }
@@ -1461,6 +1681,7 @@
         // 페이지 로드시 초기화
         window.onload = function() {
             loadState();
+            loadSeeds();
         };
     </script>
 </body>

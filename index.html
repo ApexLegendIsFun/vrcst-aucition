@@ -1741,6 +1741,7 @@
 
                 if (currentUser.role === 'admin') {
                     document.getElementById('adminPanel').style.display = 'block';
+                    document.getElementById('teamsSection').style.display = 'block'; // 관리자도 팀 현황 볼 수 있게
                     document.getElementById('userStatus').innerHTML = 
                         `👑 관리자로 로그인됨`;
                 } else if (currentUser.role === 'captain') {
