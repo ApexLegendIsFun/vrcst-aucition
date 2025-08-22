@@ -1549,26 +1549,51 @@
 
     <!-- 선수 관리 모달 -->
     <div class="auction-modal" id="playerManagementModal">
-        <div class="auction-modal-content" style="max-width: 900px;">
+        <div class="auction-modal-content" style="max-width: 1100px;">
             <span class="auction-modal-close" onclick="closePlayerManagement()">&times;</span>
             
             <h2 style="color: #764ba2; margin-bottom: 20px;">선수 데이터 관리</h2>
             
-            <div style="display: flex; gap: 10px; margin-bottom: 20px;">
-                <button class="btn" onclick="addNewPlayer()" style="background: linear-gradient(135deg, #56ab2f, #a8e063);">
-                    ➕ 새 선수 추가
+            <!-- 탭 메뉴 -->
+            <div style="display: flex; gap: 10px; margin-bottom: 20px; border-bottom: 2px solid #667eea; padding-bottom: 10px;">
+                <button class="btn" onclick="showPlayerManagementTab('players')" id="playersTabBtn" style="background: linear-gradient(135deg, #667eea, #764ba2);">
+                    🏃 선수 관리
                 </button>
-                <button class="btn" onclick="exportPlayersData()">
-                    📥 데이터 내보내기 (JSON)
+                <button class="btn" onclick="showPlayerManagementTab('captains')" id="captainsTabBtn" style="background: #999;">
+                    👑 팀장 설정
                 </button>
-                <label class="btn" style="cursor: pointer;">
-                    📤 데이터 가져오기
-                    <input type="file" accept=".json" onchange="importPlayersData(event)" style="display: none;">
-                </label>
             </div>
             
-            <div id="playersList" style="max-height: 500px; overflow-y: auto;">
-                <!-- 선수 목록이 여기에 동적으로 생성됨 -->
+            <!-- 선수 관리 탭 -->
+            <div id="playersManagementTab">
+                <div style="display: flex; gap: 10px; margin-bottom: 20px;">
+                    <button class="btn" onclick="addNewPlayer()" style="background: linear-gradient(135deg, #56ab2f, #a8e063);">
+                        ➕ 새 선수 추가
+                    </button>
+                    <button class="btn" onclick="exportPlayersData()">
+                        📥 데이터 내보내기 (JSON)
+                    </button>
+                    <label class="btn" style="cursor: pointer;">
+                        📤 데이터 가져오기
+                        <input type="file" accept=".json" onchange="importPlayersData(event)" style="display: none;">
+                    </label>
+                </div>
+                
+                <div id="playersList" style="max-height: 500px; overflow-y: auto;">
+                    <!-- 선수 목록이 여기에 동적으로 생성됨 -->
+                </div>
+            </div>
+            
+            <!-- 팀장 설정 탭 -->
+            <div id="captainsManagementTab" style="display: none;">
+                <div style="margin-bottom: 20px;">
+                    <h3 style="color: #667eea; margin-bottom: 15px;">🏆 팀별 팀장 설정</h3>
+                    <p style="color: #999; margin-bottom: 20px;">각 팀에 소속된 선수 중에서 팀장을 선택하세요.</p>
+                </div>
+                
+                <div id="captainSettingsList" style="display: grid; gap: 20px;">
+                    <!-- 팀별 팀장 설정 UI가 여기에 동적으로 생성됨 -->
+                </div>
             </div>
         </div>
     </div>
@@ -2770,6 +2795,131 @@
         // 선수 관리 모달 닫기
         function closePlayerManagement() {
             document.getElementById('playerManagementModal').style.display = 'none';
+        }
+
+        // 선수 관리 탭 전환
+        function showPlayerManagementTab(tab) {
+            if (tab === 'players') {
+                document.getElementById('playersManagementTab').style.display = 'block';
+                document.getElementById('captainsManagementTab').style.display = 'none';
+                document.getElementById('playersTabBtn').style.background = 'linear-gradient(135deg, #667eea, #764ba2)';
+                document.getElementById('captainsTabBtn').style.background = '#999';
+            } else if (tab === 'captains') {
+                document.getElementById('playersManagementTab').style.display = 'none';
+                document.getElementById('captainsManagementTab').style.display = 'block';
+                document.getElementById('playersTabBtn').style.background = '#999';
+                document.getElementById('captainsTabBtn').style.background = 'linear-gradient(135deg, #FFD700, #FFA500)';
+                loadCaptainSettings();
+            }
+        }
+
+        // 팀장 설정 UI 로드
+        function loadCaptainSettings() {
+            const container = document.getElementById('captainSettingsList');
+            container.innerHTML = '';
+            
+            // 팀 순서
+            const teamOrder = ['team_alpha', 'team_bravo', 'team_charlie', 'team_delta'];
+            const teamColors = {
+                'team_alpha': 'linear-gradient(90deg, #ff6b6b, #ff8787)',
+                'team_bravo': 'linear-gradient(90deg, #4ecdc4, #44a39f)',
+                'team_charlie': 'linear-gradient(90deg, #45b7d1, #2196f3)',
+                'team_delta': 'linear-gradient(90deg, #f9ca24, #f0b90b)'
+            };
+            
+            teamOrder.forEach(teamId => {
+                const team = teamsData[teamId];
+                if (!team) return;
+                
+                const teamCard = document.createElement('div');
+                teamCard.style.cssText = 'background: white; border-radius: 15px; padding: 25px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); border: 2px solid transparent; background-clip: padding-box; position: relative; overflow: hidden;';
+                
+                // 팀 테마 컬러 상단 바
+                const colorBar = document.createElement('div');
+                colorBar.style.cssText = `position: absolute; top: 0; left: 0; right: 0; height: 5px; background: ${teamColors[teamId]};`;
+                teamCard.appendChild(colorBar);
+                
+                // 팀 이름
+                const teamTitle = document.createElement('h4');
+                teamTitle.style.cssText = `font-size: 1.5em; margin-bottom: 15px; margin-top: 10px; background: ${teamColors[teamId]}; -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: 700;`;
+                teamTitle.textContent = team.displayName;
+                teamCard.appendChild(teamTitle);
+                
+                // 현재 팀장 표시
+                const currentCaptainDiv = document.createElement('div');
+                currentCaptainDiv.style.cssText = 'margin-bottom: 15px; padding: 10px; background: #f8f9fa; border-radius: 10px;';
+                const currentCaptain = team.captain ? playersData[team.captain] : null;
+                currentCaptainDiv.innerHTML = `
+                    <div style="font-weight: 600; color: #666; margin-bottom: 5px;">현재 팀장:</div>
+                    <div style="font-size: 1.2em; color: #333;">
+                        ${currentCaptain ? `👑 ${currentCaptain.name}` : '🚫 설정되지 않음'}
+                    </div>
+                `;
+                teamCard.appendChild(currentCaptainDiv);
+                
+                // 선수 선택 드롭다운
+                if (team.players && team.players.length > 0) {
+                    const selectLabel = document.createElement('label');
+                    selectLabel.style.cssText = 'display: block; margin-bottom: 8px; font-weight: 600; color: #666;';
+                    selectLabel.textContent = '팀장 선택:';
+                    teamCard.appendChild(selectLabel);
+                    
+                    const select = document.createElement('select');
+                    select.style.cssText = 'width: 100%; padding: 10px; border: 2px solid #667eea; border-radius: 8px; font-size: 1em; cursor: pointer;';
+                    select.innerHTML = '<option value="">팀장 없음</option>';
+                    
+                    team.players.forEach(playerId => {
+                        const player = playersData[playerId];
+                        if (player) {
+                            const option = document.createElement('option');
+                            option.value = playerId;
+                            option.textContent = player.name;
+                            if (team.captain === playerId) {
+                                option.selected = true;
+                            }
+                            select.appendChild(option);
+                        }
+                    });
+                    
+                    select.onchange = () => {
+                        const selectedPlayerId = select.value;
+                        setCaptainFromManagement(teamId, selectedPlayerId || null);
+                    };
+                    
+                    teamCard.appendChild(select);
+                } else {
+                    const noPlayersDiv = document.createElement('div');
+                    noPlayersDiv.style.cssText = 'padding: 20px; background: #f8f9fa; border-radius: 10px; text-align: center; color: #999;';
+                    noPlayersDiv.textContent = '팀에 선수가 없습니다';
+                    teamCard.appendChild(noPlayersDiv);
+                }
+                
+                container.appendChild(teamCard);
+            });
+        }
+
+        // 관리 패널에서 팀장 설정
+        function setCaptainFromManagement(teamId, playerId) {
+            if (!currentUser || currentUser.role !== 'admin') {
+                showToast('관리자만 팀장을 설정할 수 있습니다', 'error');
+                return;
+            }
+            
+            database.ref(`teams/${teamId}/captain`).set(playerId)
+                .then(() => {
+                    const team = teamsData[teamId];
+                    if (playerId) {
+                        const player = playersData[playerId];
+                        showToast(`${player.name}을(를) ${team.displayName} 팀장으로 설정했습니다`, 'success');
+                    } else {
+                        showToast(`${team.displayName} 팀장을 해제했습니다`, 'success');
+                    }
+                    // UI 업데이트
+                    loadCaptainSettings();
+                })
+                .catch(error => {
+                    showToast('팀장 설정 실패: ' + error.message, 'error');
+                });
         }
 
         // 선수 목록 로드
