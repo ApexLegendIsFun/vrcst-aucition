@@ -2450,21 +2450,7 @@
                 console.log('선수 데이터 로드 완료:', initialPlayers.length + '명');
             } catch (error) {
                 console.error('선수 데이터 로드 실패 (CORS 에러일 수 있음):', error);
-                console.log('Fallback 데이터 사용');
-                // 전체 10명 데이터를 fallback으로 설정
-                initialPlayers = [
-                    { name: "VR마스터", profileImage: "https://picsum.photos/seed/vrmaster/300/300", highScore: 45, catchPhrase: "가상이 곧 현실이다" },
-                    { name: "사이버펑크", profileImage: "https://picsum.photos/seed/cyberpunk/300/300", highScore: 42, catchPhrase: "네온빛 속의 전사" },
-                    { name: "픽셀스나이퍼", profileImage: "https://picsum.photos/seed/pixelsniper/300/300", highScore: 48, catchPhrase: "한 픽셀도 놓치지 않는다" },
-                    { name: "메타버스", profileImage: "https://picsum.photos/seed/metaverse/300/300", highScore: 38, catchPhrase: "경계를 넘어서" },
-                    { name: "홀로그램", profileImage: "https://picsum.photos/seed/hologram/300/300", highScore: 35, catchPhrase: "실체 없는 존재감" },
-                    { name: "아바타", profileImage: "https://picsum.photos/seed/avatar/300/300", highScore: 40, catchPhrase: "또 다른 나" },
-                    { name: "글리치", profileImage: "https://picsum.photos/seed/glitch/300/300", highScore: 33, catchPhrase: "버그가 아니라 기능이야" },
-                    { name: "네트워커", profileImage: "https://picsum.photos/seed/networker/300/300", highScore: 37, catchPhrase: "연결이 곧 힘" },
-                    { name: "디지털노마드", profileImage: "https://picsum.photos/seed/digitalnomad/300/300", highScore: 41, catchPhrase: "서버를 떠도는 자" },
-                    { name: "코드브레이커", profileImage: "https://picsum.photos/seed/codebreaker/300/300", highScore: 46, catchPhrase: "규칙은 깨라고 있는 것" }
-                ];
-                console.log('Fallback 데이터로 ' + initialPlayers.length + '명 로드됨');
+                initialPlayers = []; // 빈 배열로 초기화
             }
         }
 
