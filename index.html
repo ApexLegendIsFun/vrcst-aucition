@@ -499,6 +499,7 @@
             grid-template-columns: repeat(2, 1fr);
             gap: 30px;
             margin-top: 20px;
+            align-items: start; /* 각 패널이 위쪽 정렬되도록 */
         }
 
         /* 팀장 설정 버튼 */
@@ -535,7 +536,7 @@
             transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
-            min-height: 500px;
+            /* min-height 제거하여 내용에 맞게 높이 조정 */
         }
 
         .team-panel::before {
@@ -581,8 +582,22 @@
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
             gap: 15px;
-            min-height: 200px;
+            /* min-height 제거 */
             padding: 10px 0;
+        }
+
+        /* 선수가 없을 때 표시되는 메시지 스타일 */
+        .team-panel-empty {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+            color: var(--gray-medium);
+            font-size: 1.1em;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 15px;
+            border: 2px dashed rgba(255, 255, 255, 0.1);
         }
 
         .team-player-card {
@@ -2671,7 +2686,7 @@
                         <div class="team-panel-points">${team.points}P</div>
                     </div>
                     <div class="team-panel-players">
-                        ${playerCardsHTML || '<div style="color: var(--gray-medium); text-align: center; width: 100%; padding: 20px;">아직 선수가 없습니다</div>'}
+                        ${playerCardsHTML || '<div class="team-panel-empty">아직 선수가 없습니다</div>'}
                     </div>
                 `;
                 
