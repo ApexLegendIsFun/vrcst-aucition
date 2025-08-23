@@ -1978,6 +1978,12 @@
             
             Object.keys(playersData).forEach(key => {
                 const player = playersData[key];
+                
+                // 팀장인 선수는 선택 그리드에서 제외
+                if (isPlayerCaptain(key)) {
+                    return;
+                }
+                
                 const card = document.createElement('div');
                 card.className = 'player-select-card';
                 
@@ -2062,6 +2068,12 @@
         function startPlayerAuction() {
             if (!currentUser || currentUser.role !== 'admin' || !currentAuctionPlayer) {
                 showToast('관리자만 경매를 시작할 수 있습니다', 'error');
+                return;
+            }
+            
+            // 팀장인 선수는 경매 시작 불가
+            if (isPlayerCaptain(currentAuctionPlayer)) {
+                showToast('팀장으로 설정된 선수는 경매할 수 없습니다', 'error');
                 return;
             }
             
@@ -2519,6 +2531,16 @@
                 });
         }
 
+        // 선수가 팀장인지 확인하는 헬퍼 함수
+        function isPlayerCaptain(playerId) {
+            for (const teamId in teamsData) {
+                if (teamsData[teamId].captain === playerId) {
+                    return true;
+                }
+            }
+            return false;
+        }
+
         function renderPlayers() {
             const grid = document.getElementById('playersGrid');
             grid.innerHTML = '';
@@ -2538,6 +2560,11 @@
             // 탭에 따른 필터링
             const filteredPlayers = Object.keys(playersData).filter(key => {
                 const player = playersData[key];
+                
+                // 팀장인 선수는 모든 탭에서 제외
+                if (isPlayerCaptain(key)) {
+                    return false;
+                }
                 
                 if (player.auctionStatus === 'failed') {
                     failedPlayersCount++;

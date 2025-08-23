@@ -6,7 +6,8 @@
       "Bash(copy players.json players_backup.json)",
       "Bash(powershell Copy-Item:*)",
       "Bash(node:*)",
-      "Bash(del generate_team_images.html create_team_images.py)"
+      "Bash(del generate_team_images.html create_team_images.py)",
+      "Bash(rm:*)"
     ],
     "deny": [],
     "ask": []
