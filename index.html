@@ -2065,33 +2065,42 @@
                 return;
             }
             
-            const duration = prompt('입찰 시간을 초 단위로 입력하세요 (예: 30)');
-            if (!duration || isNaN(duration)) {
-                showToast('올바른 시간을 입력하세요', 'error');
-                return;
-            }
-            
-            const endTime = Date.now() + (parseInt(duration) * 1000);
-            
-            // 현재 경매 정보 설정
-            database.ref('currentAuction').set({
-                playerKey: currentAuctionPlayer,
-                active: true,
-                endTime: endTime,
-                startTime: Date.now()
+            // 현재 진행 중인 경매가 있는지 확인
+            database.ref('currentAuction').once('value', (snapshot) => {
+                const auctionData = snapshot.val();
+                if (auctionData && auctionData.active) {
+                    showToast('이미 진행 중인 경매가 있습니다. 먼저 종료해주세요', 'error');
+                    return;
+                }
+                
+                const duration = prompt('입찰 시간을 초 단위로 입력하세요 (예: 30)');
+                if (!duration || isNaN(duration)) {
+                    showToast('올바른 시간을 입력하세요', 'error');
+                    return;
+                }
+                
+                const endTime = Date.now() + (parseInt(duration) * 1000);
+                
+                // 현재 경매 정보 설정
+                database.ref('currentAuction').set({
+                    playerKey: currentAuctionPlayer,
+                    active: true,
+                    endTime: endTime,
+                    startTime: Date.now()
+                });
+                
+                // 선수 상태 업데이트
+                database.ref(`players/${currentAuctionPlayer}`).update({
+                    auctionStatus: 'active',
+                    currentBid: 0,
+                    lastBidder: null
+                });
+                
+                showToast(`${playersData[currentAuctionPlayer].name} 선수 경매가 시작되었습니다!`, 'success');
+                
+                // 모달 자동 닫기 (경매 패널에서 관리)
+                closeAuctionModal();
             });
-            
-            // 선수 상태 업데이트
-            database.ref(`players/${currentAuctionPlayer}`).update({
-                auctionStatus: 'active',
-                currentBid: 0,
-                lastBidder: null
-            });
-            
-            showToast(`${playersData[currentAuctionPlayer].name} 선수 경매가 시작되었습니다!`, 'success');
-            
-            // 모달 자동 닫기 (경매 패널에서 관리)
-            closeAuctionModal();
         }
 
         // 현재 경매 확정
@@ -2638,7 +2647,26 @@
                 teamPanel.className = `team-panel ${teamClassMap[teamId] || ''}`;
                 teamPanel.id = `team-panel-${teamId}`;
                 
-                // 팀 선수들의 정보 가져오기
+                // 팀장 정보 가져오기
+                const captainId = team.captain || null;
+                let captainHTML = '';
+                
+                // 팀장이 있으면 먼저 표시
+                if (captainId && playersData[captainId]) {
+                    const captain = playersData[captainId];
+                    captainHTML = `
+                        <div class="team-player-card captain" title="${captain.name} - 팀장">
+                            <div style="position: absolute; top: 5px; right: 5px; background: linear-gradient(135deg, #FFD700, #FFA500); color: white; padding: 3px 8px; border-radius: 5px; font-size: 0.8em; font-weight: 600;">
+                                👑 팀장
+                            </div>
+                            <img src="${getPlayerImageUrl(captain)}" alt="${captain.name}" class="team-player-image">
+                            <div class="team-player-name" style="color: #FFD700; font-weight: 700;">${captain.name}</div>
+                            <div class="team-player-price">팀장</div>
+                        </div>
+                    `;
+                }
+                
+                // 팀 선수들의 정보 가져오기 (팀장 제외)
                 const players = team.players ? 
                     team.players.map(pId => {
                         const player = playersData[pId];
@@ -2654,29 +2682,14 @@
                         return null;
                     }).filter(Boolean) : [];
                 
-                // 팀장 정보 가져오기
-                const captainId = team.captain || null;
-                
-                // 선수 카드 HTML 생성 (팀장 먼저 표시)
+                // 선수 카드 HTML 생성
                 const playerCardsHTML = players
-                    .sort((a, b) => {
-                        // 팀장을 먼저 배치
-                        if (a.id === captainId) return -1;
-                        if (b.id === captainId) return 1;
-                        return 0;
-                    })
                     .map(player => {
-                        const isCaptain = player.id === captainId;
                         return `
-                            <div class="team-player-card ${isCaptain ? 'captain' : ''}" title="${player.name} - ${player.price}P">
-                                ${currentUser && currentUser.role === 'admin' ? 
-                                    `<button class="set-captain-btn" onclick="setCaptain('${teamId}', '${player.id}')">
-                                        ${isCaptain ? '팀장 해제' : '팀장 설정'}
-                                    </button>` : ''}
+                            <div class="team-player-card" title="${player.name} - ${player.price}P">
                                 <img src="${player.image}" alt="${player.name}" class="team-player-image">
                                 <div class="team-player-name">${player.name}</div>
                                 <div class="team-player-price">${player.price}P</div>
-                                ${isCaptain ? '<div class="captain-badge">Captain</div>' : ''}
                             </div>
                         `;
                     }).join('');
@@ -2687,7 +2700,9 @@
                         <div class="team-panel-points">${team.points}P</div>
                     </div>
                     <div class="team-panel-players">
-                        ${playerCardsHTML || '<div class="team-panel-empty">아직 선수가 없습니다</div>'}
+                        ${captainHTML}
+                        ${playerCardsHTML}
+                        ${!captainHTML && !playerCardsHTML ? '<div class="team-panel-empty">아직 선수가 없습니다</div>' : ''}
                     </div>
                 `;
                 
@@ -2938,6 +2953,54 @@
                 });
         }
 
+        // 선수를 특정 팀의 팀장으로 설정하는 함수
+        function setCaptainForTeam(playerKey, teamId) {
+            if (!currentUser || currentUser.role !== 'admin') {
+                showToast('관리자만 팀장을 설정할 수 있습니다', 'error');
+                return;
+            }
+            
+            const player = playersData[playerKey];
+            
+            // 먼저 이 선수가 다른 팀의 팀장인지 확인하고 해제
+            Object.keys(teamsData).forEach(tid => {
+                if (teamsData[tid].captain === playerKey && tid !== teamId) {
+                    database.ref(`teams/${tid}/captain`).set(null);
+                }
+            });
+            
+            if (teamId) {
+                // 새로운 팀의 팀장으로 설정
+                database.ref(`teams/${teamId}/captain`).set(playerKey)
+                    .then(() => {
+                        const team = teamsData[teamId];
+                        showToast(`${player.name}을(를) ${team.displayName} 팀장으로 설정했습니다`, 'success');
+                        
+                        // UI 업데이트
+                        setTimeout(() => {
+                            loadPlayersList();
+                            if (document.getElementById('captainSettingsList')) {
+                                loadCaptainSettings();
+                            }
+                        }, 500);
+                    })
+                    .catch(error => {
+                        showToast('팀장 설정 실패: ' + error.message, 'error');
+                    });
+            } else {
+                // 팀장 해제
+                showToast(`${player.name}의 팀장을 해제했습니다`, 'info');
+                
+                // UI 업데이트
+                setTimeout(() => {
+                    loadPlayersList();
+                    if (document.getElementById('captainSettingsList')) {
+                        loadCaptainSettings();
+                    }
+                }, 500);
+            }
+        }
+
         // 선수 목록 로드
         function loadPlayersList() {
             const listContainer = document.getElementById('playersList');
@@ -2945,10 +3008,44 @@
             
             Object.keys(playersData).forEach(key => {
                 const player = playersData[key];
+                
+                // 선수가 어느 팀의 팀장인지 찾기
+                let captainOfTeam = null;
+                Object.keys(teamsData).forEach(teamId => {
+                    const team = teamsData[teamId];
+                    if (team.captain === key) {
+                        captainOfTeam = teamId;
+                    }
+                });
+                
+                // 팀장인 선수는 선수 관리 목록에서 제외
+                if (captainOfTeam) {
+                    return; // 팀장은 건너뛰기
+                }
+                
                 const playerCard = document.createElement('div');
                 playerCard.style.cssText = 'display: flex; align-items: center; padding: 20px; margin-bottom: 15px; background: white; border: 2px solid #667eea; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); transition: all 0.3s;';
                 playerCard.onmouseover = function() { this.style.transform = 'translateY(-3px)'; this.style.boxShadow = '0 6px 20px rgba(102, 126, 234, 0.2)'; };
                 playerCard.onmouseout = function() { this.style.transform = 'translateY(0)'; this.style.boxShadow = '0 4px 15px rgba(0,0,0,0.1)'; };
+                
+                // 팀장 설정 드롭다운 HTML (Admin만 표시)
+                const captainSelectHtml = currentUser && currentUser.role === 'admin' ? `
+                    <select onchange="setCaptainForTeam('${key}', this.value)" 
+                            style="padding: 10px 15px; background: linear-gradient(135deg, #FFD700, #FFA500); border: none; border-radius: 8px; color: white; font-weight: 600; font-size: 0.95em; cursor: pointer;">
+                        <option value="" ${!captainOfTeam ? 'selected' : ''}>📌 팀장 아님</option>
+                        <option value="team_alpha" ${captainOfTeam === 'team_alpha' ? 'selected' : ''}>👑 Alpha 팀장</option>
+                        <option value="team_bravo" ${captainOfTeam === 'team_bravo' ? 'selected' : ''}>👑 Bravo 팀장</option>
+                        <option value="team_charlie" ${captainOfTeam === 'team_charlie' ? 'selected' : ''}>👑 Charlie 팀장</option>
+                        <option value="team_delta" ${captainOfTeam === 'team_delta' ? 'selected' : ''}>👑 Delta 팀장</option>
+                    </select>
+                ` : '';
+                
+                // 현재 팀장 상태 표시 (Admin이 아닌 경우)
+                const captainStatusHtml = captainOfTeam && (!currentUser || currentUser.role !== 'admin') ? `
+                    <div style="color: #FFD700; font-size: 1.0em; margin-top: 5px; font-weight: 600;">
+                        👑 ${teamsData[captainOfTeam].displayName} 팀장
+                    </div>
+                ` : '';
                 
                 playerCard.innerHTML = `
                     <img src="${getPlayerImageUrl(player)}" style="width: 100px; height: 100px; border-radius: 12px; margin-right: 20px; object-fit: cover; border: 3px solid #667eea; box-shadow: 0 4px 10px rgba(0,0,0,0.2);">
@@ -2956,8 +3053,10 @@
                         <div style="font-weight: bold; font-size: 1.3em; color: #333; margin-bottom: 8px;">${player.name}</div>
                         <div style="color: #FFD700; font-size: 1.1em; font-weight: 600; margin-bottom: 5px;">⭐ 최고 점수: ${player.highScore || 0}</div>
                         <div style="color: #764ba2; font-size: 0.95em; font-style: italic;">"${player.catchPhrase || '...'}"</div>
+                        ${captainStatusHtml}
                     </div>
-                    <div style="display: flex; gap: 10px;">
+                    <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
+                        ${captainSelectHtml}
                         <button class="btn" onclick="editPlayer('${key}')" style="padding: 10px 20px;">수정</button>
                         <button class="btn btn-danger" onclick="deletePlayer('${key}')" style="padding: 10px 20px;">삭제</button>
                     </div>

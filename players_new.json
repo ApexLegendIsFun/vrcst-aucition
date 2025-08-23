@@ -1,0 +1,144 @@
+{
+  "players": [
+    {
+      "name": "여울 シ",
+      "profileImage": "./images/profiles/player_1_profile.png",
+      "highScore": "21,730",
+      "catchPhrase": "Chiken",
+      "fullImage": "./images/여울 シ.png"
+    },
+    {
+      "name": "Haru_",
+      "profileImage": "./images/profiles/player_2_profile.png",
+      "highScore": "S2 Premier 24098",
+      "catchPhrase": "다 잡아먹을테다 크앙",
+      "fullImage": "./images/Haru_.jpg"
+    },
+    {
+      "name": "_Kanaria_",
+      "profileImage": "./images/profiles/player_3_profile.png",
+      "highScore": "페잇 10레벨",
+      "catchPhrase": "나 한두마리 제자임 ㅇㅅㅇ",
+      "fullImage": "./images/_Kanaria_.PNG"
+    },
+    {
+      "name": "Yel7",
+      "profileImage": "./images/profiles/player_4_profile.png",
+      "highScore": "프미 15000",
+      "catchPhrase": "하나둘셋브이알챗화이팅",
+      "fullImage": "./images/Yel7.jpeg"
+    },
+    {
+      "name": "Doyoung2",
+      "profileImage": "./images/profiles/player_5_profile.png",
+      "highScore": "프리미어 14,999",
+      "catchPhrase": "아자아자 화이팅",
+      "fullImage": "./images/Doyoung2.png"
+    },
+    {
+      "name": "catistrue",
+      "profileImage": "./images/profiles/player_6_profile.png",
+      "highScore": "프미17k",
+      "catchPhrase": "카운터스트라이크2화이팅",
+      "fullImage": "./images/catistrue.png"
+    },
+    {
+      "name": "arithmetica",
+      "profileImage": "./images/profiles/player_7_profile.png",
+      "highScore": "프리미어 18000점입니당.",
+      "catchPhrase": "화이팅!!!!!!!!!!!!!!!!",
+      "fullImage": "./images/arithmetica.jpg"
+    },
+    {
+      "name": "Hoon",
+      "profileImage": "./images/profiles/player_8_profile.png",
+      "highScore": "23000 플미",
+      "catchPhrase": "Ang",
+      "fullImage": "./images/Hoon.png"
+    },
+    {
+      "name": "Pocat",
+      "profileImage": "./images/profiles/player_9_profile.png",
+      "highScore": "30221",
+      "catchPhrase": "야호~~~",
+      "fullImage": "./images/Pocat.png"
+    },
+    {
+      "name": "요정",
+      "profileImage": "./images/profiles/player_10_profile.png",
+      "highScore": "프리미어 24999점",
+      "catchPhrase": "봐줘잉",
+      "fullImage": "./images/요정.png"
+    },
+    {
+      "name": "TOPGU",
+      "profileImage": "./images/profiles/player_11_profile.png",
+      "highScore": "프리미어 15000",
+      "catchPhrase": "성실하게 매너게임 하겟숩니다",
+      "fullImage": "./images/TOPGU.png"
+    },
+    {
+      "name": "Monad1729",
+      "profileImage": "./images/profiles/player_12_profile.png",
+      "highScore": "완미: 2042(A)",
+      "catchPhrase": "한 수 배우고 가겠습니다",
+      "fullImage": "./images/Monad1729.png"
+    },
+    {
+      "name": "-라후이-",
+      "profileImage": "./images/profiles/player_13_profile.png",
+      "highScore": "완미 S",
+      "catchPhrase": "9시 30분에 야구 하러 가야되긴 하는데 화이팅",
+      "fullImage": "./images/-라후이-.jpg"
+    },
+    {
+      "name": "KurenKuren",
+      "profileImage": "./images/profiles/player_14_profile.png",
+      "highScore": "프리미엄 15000점",
+      "catchPhrase": "안녕하세요. 빠와 까를 미치게 하는 슈퍼스타가 될 수 있도록 열심히 해보겠습니다.",
+      "fullImage": "./images/KurenKuren.jpg"
+    },
+    {
+      "name": "magimari",
+      "profileImage": "./images/profiles/player_15_profile.png",
+      "highScore": "프리미어 1.6만",
+      "catchPhrase": "홧팅하겟습니다",
+      "fullImage": "./images/magimari.jpeg"
+    },
+    {
+      "name": "コロナ",
+      "profileImage": "./images/profiles/player_16_profile.png",
+      "highScore": "23989",
+      "catchPhrase": "접은지 2~3년이지만 열심히 해보겠습니당",
+      "fullImage": "./images/コロナ.webp"
+    },
+    {
+      "name": "액 셀 셀",
+      "profileImage": "./images/profiles/player_17_profile.png",
+      "highScore": "13,447",
+      "catchPhrase": "잘못하지만 잘부탁드립니다",
+      "fullImage": "./images/액 셀 셀.png"
+    },
+    {
+      "name": "HIGHJI",
+      "profileImage": "./images/profiles/player_18_profile.png",
+      "highScore": "응애 뉴비..",
+      "catchPhrase": "PUBG PRO CAOCH (JP) TEAM [JUC]→[AFFLICT]→[AE]→[NR]→[CCC] OW ++4650 Asia 11  ※CSGO 플탐20시간....",
+      "fullImage": "./images/profile_placeholder.png"
+    },
+    {
+      "name": "정 상_",
+      "profileImage": "./images/profiles/player_19_profile.png",
+      "highScore": "프리미어 20k",
+      "catchPhrase": "파이팅..",
+      "fullImage": "./images/정 상_.png"
+    },
+    {
+      "name": "Shirome",
+      "profileImage": "./images/profiles/player_20_profile.png",
+      "highScore": "프리미어 14999",
+      "catchPhrase": ".",
+      "fullImage": "./images/Shirome.png"
+    }
+  ]
+}
