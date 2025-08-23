@@ -832,10 +832,10 @@
                         <p class="seed-description">승자조 결승 직행</p>
                         <select id="seed1" class="seed-select" onchange="updateSeeds()">
                             <option value="">선택하세요</option>
-                            <option value="alpha">Team Alpha</option>
-                            <option value="bravo">Team Bravo</option>
-                            <option value="charlie">Team Charlie</option>
-                            <option value="delta">Team Delta</option>
+                            <option value="alpha">Kuren</option>
+                            <option value="bravo">Hoon</option>
+                            <option value="charlie">여울</option>
+                            <option value="delta">Kanaria</option>
                         </select>
                     </div>
                     <div class="seed-card">
@@ -843,10 +843,10 @@
                         <p class="seed-description">승자조 준결승 직행</p>
                         <select id="seed2" class="seed-select" onchange="updateSeeds()">
                             <option value="">선택하세요</option>
-                            <option value="alpha">Team Alpha</option>
-                            <option value="bravo">Team Bravo</option>
-                            <option value="charlie">Team Charlie</option>
-                            <option value="delta">Team Delta</option>
+                            <option value="alpha">Kuren</option>
+                            <option value="bravo">Hoon</option>
+                            <option value="charlie">여울</option>
+                            <option value="delta">Kanaria</option>
                         </select>
                     </div>
                     <div class="seed-card">
@@ -854,10 +854,10 @@
                         <p class="seed-description">플레이인 경기</p>
                         <select id="seed3" class="seed-select" onchange="updateSeeds()">
                             <option value="">선택하세요</option>
-                            <option value="alpha">Team Alpha</option>
-                            <option value="bravo">Team Bravo</option>
-                            <option value="charlie">Team Charlie</option>
-                            <option value="delta">Team Delta</option>
+                            <option value="alpha">Kuren</option>
+                            <option value="bravo">Hoon</option>
+                            <option value="charlie">여울</option>
+                            <option value="delta">Kanaria</option>
                         </select>
                     </div>
                     <div class="seed-card">
@@ -865,10 +865,10 @@
                         <p class="seed-description">플레이인 경기</p>
                         <select id="seed4" class="seed-select" onchange="updateSeeds()">
                             <option value="">선택하세요</option>
-                            <option value="alpha">Team Alpha</option>
-                            <option value="bravo">Team Bravo</option>
-                            <option value="charlie">Team Charlie</option>
-                            <option value="delta">Team Delta</option>
+                            <option value="alpha">Kuren</option>
+                            <option value="bravo">Hoon</option>
+                            <option value="charlie">여울</option>
+                            <option value="delta">Kanaria</option>
                         </select>
                     </div>
                 </div>
@@ -881,22 +881,22 @@
 
         <div class="teams-status" id="teamsStatus">
             <div class="team-card team-alpha">
-                <h3>Team Alpha</h3>
+                <h3>Kuren</h3>
                 <div class="team-record">전적: <span id="alphaRecord">0승 0패</span></div>
                 <div class="team-status status-winner" id="alphaStatus">승자조</div>
             </div>
             <div class="team-card team-bravo">
-                <h3>Team Bravo</h3>
+                <h3>Hoon</h3>
                 <div class="team-record">전적: <span id="bravoRecord">0승 0패</span></div>
                 <div class="team-status status-winner" id="bravoStatus">승자조</div>
             </div>
             <div class="team-card team-charlie">
-                <h3>Team Charlie</h3>
+                <h3>여울</h3>
                 <div class="team-record">전적: <span id="charlieRecord">0승 0패</span></div>
                 <div class="team-status status-winner" id="charlieStatus">승자조</div>
             </div>
             <div class="team-card team-delta">
-                <h3>Team Delta</h3>
+                <h3>Kanaria</h3>
                 <div class="team-record">전적: <span id="deltaRecord">0승 0패</span></div>
                 <div class="team-status status-winner" id="deltaStatus">승자조</div>
             </div>
@@ -1105,10 +1105,10 @@
             }
             
             const teamNames = {
-                alpha: 'Team Alpha',
-                bravo: 'Team Bravo',
-                charlie: 'Team Charlie',
-                delta: 'Team Delta'
+                alpha: 'Kuren',
+                bravo: 'Hoon',
+                charlie: '여울',
+                delta: 'Kanaria'
             };
             
             // 시드 정보 저장
@@ -1187,10 +1187,10 @@
                 
                 // 대진표에 적용
                 const teamNames = {
-                    alpha: 'Team Alpha',
-                    bravo: 'Team Bravo',
-                    charlie: 'Team Charlie',
-                    delta: 'Team Delta'
+                    alpha: 'Kuren',
+                    bravo: 'Hoon',
+                    charlie: '여울',
+                    delta: 'Kanaria'
                 };
                 
                 if (seedAssignments.seed3) {
@@ -1211,10 +1211,10 @@
         // 토너먼트 상태 관리
         let tournamentState = {
             teams: {
-                alpha: { name: 'Team Alpha', wins: 0, losses: 0, status: 'winner', color: '#ff6b6b' },
-                bravo: { name: 'Team Bravo', wins: 0, losses: 0, status: 'winner', color: '#4ecdc4' },
-                charlie: { name: 'Team Charlie', wins: 0, losses: 0, status: 'winner', color: '#45b7d1' },
-                delta: { name: 'Team Delta', wins: 0, losses: 0, status: 'winner', color: '#f9ca24' }
+                alpha: { name: 'Kuren', wins: 0, losses: 0, status: 'winner', color: '#ff6b6b' },
+                bravo: { name: 'Hoon', wins: 0, losses: 0, status: 'winner', color: '#4ecdc4' },
+                charlie: { name: '여울', wins: 0, losses: 0, status: 'winner', color: '#45b7d1' },
+                delta: { name: 'Kanaria', wins: 0, losses: 0, status: 'winner', color: '#f9ca24' }
             },
             matches: {},
             currentRound: 'wb-semis',

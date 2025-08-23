@@ -17,8 +17,8 @@ VR CST (VRChat Counter-Strike Tournament) is a single-page web application for c
 
 1. **User Roles**
    - Admin: Can initialize auctions, start bid timers, end auctions
-   - Team Captains: Can bid on players using allocated points (1000P initial)
-   - 4 teams: Alpha, Bravo, Charlie, Delta
+   - Team Captains: Can bid on players using allocated points (varied by team)
+   - 4 teams: Kuren (1000P), Hoon (880P), 여울 (820P), Kanaria (820P)
 
 2. **Data Structure (Firebase)**
    ```
@@ -53,9 +53,9 @@ npx serve .
 - Real-time database listeners on `/players`, `/teams`, `/auctionTimer`
 
 ### Password System
-- Hardcoded in JavaScript (lines 486-492)
+- Hardcoded in JavaScript (lines 1703-1710)
 - Admin: admin123
-- Teams: alpha123, bravo123, charlie123, delta123
+- Teams: kuren123, hoon123, yeoul123, kanaria123
 
 ### Critical Functions
 - `initializeAuction()`: Resets all auction data (admin only)

@@ -1469,10 +1469,10 @@
             <div class="login-section">
                 <select id="teamSelect">
                     <option value="">팀 선택...</option>
-                    <option value="team_alpha">Team Alpha</option>
-                    <option value="team_bravo">Team Bravo</option>
-                    <option value="team_charlie">Team Charlie</option>
-                    <option value="team_delta">Team Delta</option>
+                    <option value="team_alpha">Kuren</option>
+                    <option value="team_bravo">Hoon</option>
+                    <option value="team_charlie">여울</option>
+                    <option value="team_delta">Kanaria</option>
                     <option value="admin">관리자</option>
                 </select>
                 <input type="password" id="password" placeholder="비밀번호">
@@ -1703,10 +1703,10 @@
         // 팀 정보
         const teams = {
             'admin': { password: 'admin123', role: 'admin' },
-            'team_alpha': { password: 'alpha123', role: 'captain', displayName: 'Team Alpha', points: 1000 },
-            'team_bravo': { password: 'bravo123', role: 'captain', displayName: 'Team Bravo', points: 1000 },
-            'team_charlie': { password: 'charlie123', role: 'captain', displayName: 'Team Charlie', points: 1000 },
-            'team_delta': { password: 'delta123', role: 'captain', displayName: 'Team Delta', points: 1000 }
+            'team_alpha': { password: 'kuren123', role: 'captain', displayName: 'Kuren', points: 1000 },
+            'team_bravo': { password: 'hoon123', role: 'captain', displayName: 'Hoon', points: 880 },
+            'team_charlie': { password: 'yeoul123', role: 'captain', displayName: '여울', points: 820 },
+            'team_delta': { password: 'kanaria123', role: 'captain', displayName: 'Kanaria', points: 820 }
         };
 
         function showToast(message, type = 'default') {
@@ -1747,13 +1747,13 @@
                 } else if (currentUser.role === 'captain') {
                     document.getElementById('teamsSection').style.display = 'block';
                     document.getElementById('userStatus').innerHTML = 
-                        `⚔️ ${currentUser.displayName} 주장으로 로그인됨 | 보유 포인트: <span class="points" id="userPoints">1000P</span>`;
+                        `⚔️ ${currentUser.displayName} 주장으로 로그인됨 | 보유 포인트: <span class="points" id="userPoints">${currentUser.points}P</span>`;
                     
                     // Firebase에서 팀 데이터 동기화
                     database.ref(`teams/${teamId}`).on('value', (snapshot) => {
                         const data = snapshot.val();
                         if (data) {
-                            currentUser.points = data.points || 1000;
+                            currentUser.points = data.points || teams[teamId].points;
                             document.getElementById('userPoints').textContent = currentUser.points + 'P';
                         }
                     });
@@ -1812,7 +1812,7 @@
                     if (teams[teamId].role === 'captain') {
                         teamsObj[teamId] = {
                             displayName: teams[teamId].displayName,
-                            points: 1000,
+                            points: teams[teamId].points,
                             players: []
                         };
                     }
@@ -2138,7 +2138,7 @@
                     
                     // 팀 포인트 차감 및 선수 추가
                     database.ref(`teams/${player.lastBidder}`).once('value', (teamSnapshot) => {
-                        const teamData = teamSnapshot.val() || { points: 1000, players: [] };
+                        const teamData = teamSnapshot.val() || { points: teams[player.lastBidder]?.points || 1000, players: [] };
                         const newPoints = teamData.points - player.currentBid;
                         const newPlayers = [...(teamData.players || []), playerKey];
                         
@@ -2482,7 +2482,7 @@
                         if (teams[teamId].role === 'captain') {
                             teamsObj[teamId] = {
                                 displayName: teams[teamId].displayName,
-                                points: 1000,
+                                points: teams[teamId].points,
                                 players: [],
                                 captain: null // 팀장 초기값
                             };
@@ -3060,10 +3060,10 @@
                     <select onchange="setCaptainForTeam('${key}', this.value)" 
                             style="padding: 10px 15px; background: linear-gradient(135deg, #FFD700, #FFA500); border: none; border-radius: 8px; color: white; font-weight: 600; font-size: 0.95em; cursor: pointer;">
                         <option value="" ${!captainOfTeam ? 'selected' : ''}>📌 팀장 아님</option>
-                        <option value="team_alpha" ${captainOfTeam === 'team_alpha' ? 'selected' : ''}>👑 Alpha 팀장</option>
-                        <option value="team_bravo" ${captainOfTeam === 'team_bravo' ? 'selected' : ''}>👑 Bravo 팀장</option>
-                        <option value="team_charlie" ${captainOfTeam === 'team_charlie' ? 'selected' : ''}>👑 Charlie 팀장</option>
-                        <option value="team_delta" ${captainOfTeam === 'team_delta' ? 'selected' : ''}>👑 Delta 팀장</option>
+                        <option value="team_alpha" ${captainOfTeam === 'team_alpha' ? 'selected' : ''}>👑 Kuren 팀장</option>
+                        <option value="team_bravo" ${captainOfTeam === 'team_bravo' ? 'selected' : ''}>👑 Hoon 팀장</option>
+                        <option value="team_charlie" ${captainOfTeam === 'team_charlie' ? 'selected' : ''}>👑 여울 팀장</option>
+                        <option value="team_delta" ${captainOfTeam === 'team_delta' ? 'selected' : ''}>👑 Kanaria 팀장</option>
                     </select>
                 ` : '';
                 
